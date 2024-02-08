@@ -11,6 +11,7 @@ const ticTacToeGame = (function () {
     };
 
     const playerTurn = () => {
+        turns++;
         let row, col;
         console.log(`${playerState}'s turn. Choose a row and column.`);
 
@@ -24,17 +25,26 @@ const ticTacToeGame = (function () {
             console.log("Position already taken. Try again.");
         }
         gameBoard[row][col] = playerState;
-
-        checkWinner(row, col);
-
-        if (playerState === "x") {
-            playerState = "o";
-        }
-        else {
-            playerState = "x";
-        }
-        turns++;
+        let gameState = checkWinner(row, col);
         displayBoard();
+
+        if (gameState === "WINNER") {
+            console.log(`${playerState} wins.`);
+            return;
+        }
+        else if (gameState === "DRAW") {
+            console.log("It's a draw.");
+            return;
+        }
+        else if (gameState === "ONGOING") {
+            if (playerState === "x") {
+                playerState = "o";
+            }
+            else {
+                playerState = "x";
+            }
+            playerTurn();
+        }
     };
 
     const checkWinner = (row, col) => {
@@ -44,7 +54,7 @@ const ticTacToeGame = (function () {
             }
             if (i == 2) {
                 console.log(`${playerState} wins`);
-                return true;
+                return "WINNER";
             }
         }
 
@@ -54,7 +64,7 @@ const ticTacToeGame = (function () {
             }
             if (i == 2) {
                 console.log(`${playerState} wins`);
-                return true;
+                return "WINNER";
             }
         }
 
@@ -65,11 +75,11 @@ const ticTacToeGame = (function () {
                 }
                 if (i == 2) {
                     console.log(`${playerState} wins`);
-                    return true;
+                    return "WINNER";
                 }
             }
         }
-        
+
         if (row + col === 2) {
             for (let i = 0; i < 3; i++) {
                 if (gameBoard[i][2 - i] !== playerState) {
@@ -77,10 +87,16 @@ const ticTacToeGame = (function () {
                 }
                 if (i == 2) {
                     console.log(`${playerState} wins`);
-                    return true;
+                    return "WINNER";
                 }
             }
         }
+
+        if (turns >= 9) {
+            return "DRAW";
+        }
+
+        return "ONGOING";
     };
 
     return {displayBoard, playerTurn};
