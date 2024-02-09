@@ -3,6 +3,18 @@ const ticTacToeGame = (function () {
     let playerState = "x";
     let turns = 0;
 
+    const newGame = () => {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                gameBoard[i][j] = ".";
+            }
+        }
+        playerState = "x";
+        turns = 0;
+        displayBoard();
+        playerTurn();
+    };
+
     const displayBoard = () => {
         console.log("  1 2 3");
         for (let i = 0; i < 3; i++) {
@@ -99,5 +111,5 @@ const ticTacToeGame = (function () {
         return "ONGOING";
     };
 
-    return {displayBoard, playerTurn};
+    return {newGame, displayBoard};
 })();
