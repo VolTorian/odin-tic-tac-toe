@@ -1,4 +1,8 @@
 const ticTacToeGame = (function () {
+    const newGameButton = document.getElementById("new-game");
+    const gridSquares = document.querySelectorAll(".cell");
+    // gridSquares.forEach((square) => square.addEventListener("click", playerTurn));
+
     const gameBoard = [[".", ".", "."], [".", ".", "."], [".", ".", "."]];
     let playerState = "x";
     let turns = 0;
@@ -110,6 +114,8 @@ const ticTacToeGame = (function () {
 
         return "ONGOING";
     };
+
+    newGameButton.addEventListener("click", newGame);
 
     return {newGame, displayBoard};
 })();
