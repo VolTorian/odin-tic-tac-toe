@@ -1,11 +1,46 @@
 const ticTacToeGame = (function () {
     const newGameButton = document.getElementById("new-game");
     const gridSquares = document.querySelectorAll(".cell");
-    // gridSquares.forEach((square) => square.addEventListener("click", playerTurn));
 
     const gameBoard = [[".", ".", "."], [".", ".", "."], [".", ".", "."]];
     let playerState = "x";
     let turns = 0;
+
+    const handlePlayerChoice = (event) => {
+        const cellClasses = event.target.className.split(" ");
+        let row = cellClasses[1].charAt(cellClasses[1].length - 1);
+        let col = cellClasses[2].charAt(cellClasses[2].length - 1);
+
+        if (gameBoard[row][col] === ".") {
+            turns++;
+            gameBoard[row][col] = playerState;
+            let gameState = checkWinner(row, col);
+            displayBoard();
+            console.log(gameState);
+
+            if (gameState === "WINNER") {
+                console.log(`${playerState} wins.`);
+                gridSquares.forEach((square) => square.removeEventListener("click", handlePlayerChoice));
+                return;
+            }
+            else if (gameState === "DRAW") {
+                console.log("It's a draw.");
+                gridSquares.forEach((square) => square.removeEventListener("click", handlePlayerChoice));
+                return;
+            }
+            else if (gameState === "ONGOING") {
+                if (playerState === "x") {
+                    playerState = "o";
+                }
+                else {
+                    playerState = "x";
+                }
+            }
+        }
+        else {
+            console.log("Position already taken. Try again.");
+        }
+    };
 
     const newGame = () => {
         for (let i = 0; i < 3; i++) {
@@ -116,6 +151,7 @@ const ticTacToeGame = (function () {
     };
 
     newGameButton.addEventListener("click", newGame);
+    gridSquares.forEach((square) => square.addEventListener("click", handlePlayerChoice));
 
     return {newGame, displayBoard};
 })();
