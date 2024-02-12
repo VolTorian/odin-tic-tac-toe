@@ -1,6 +1,7 @@
 const ticTacToeGame = (function () {
     const newGameButton = document.getElementById("new-game");
     const gridSquares = document.querySelectorAll(".cell");
+    const turnIndicator = document.getElementById("current-turn");
 
     const gameBoard = [[".", ".", "."], [".", ".", "."], [".", ".", "."]];
     let playerState = "x";
@@ -30,9 +31,11 @@ const ticTacToeGame = (function () {
             else if (gameState === "ONGOING") {
                 if (playerState === "x") {
                     playerState = "o";
+                    turnIndicator.src = "./images/circle-outline.svg";
                 }
                 else {
                     playerState = "x";
+                    turnIndicator.src = "./images/close.svg";
                 }
             }
         }

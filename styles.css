@@ -15,3 +15,10 @@ h1 {
 .cell {
     border: solid 1px;
 }
+
+#turn-box {
+    border: solid 1px;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+}
