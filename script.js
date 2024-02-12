@@ -16,7 +16,6 @@ const ticTacToeGame = (function () {
             gameBoard[row][col] = playerState;
             let gameState = checkWinner(row, col);
             displayBoard();
-            console.log(gameState);
 
             if (gameState === "WINNER") {
                 console.log(`${playerState} wins.`);
@@ -131,7 +130,7 @@ const ticTacToeGame = (function () {
             }
         }
 
-        if (row + col === 2) {
+        if (parseInt(row) + parseInt(col) === 2) {
             for (let i = 0; i < 3; i++) {
                 if (gameBoard[i][2 - i] !== playerState) {
                     break;
