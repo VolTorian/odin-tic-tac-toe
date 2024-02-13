@@ -65,43 +65,6 @@ const ticTacToeGame = (function () {
         }
     };
 
-    const playerTurn = () => {
-        turns++;
-        let row, col;
-        console.log(`${playerState}'s turn. Choose a row and column.`);
-
-        while (true) {
-            row = prompt("Enter a row number:") - 1;
-            col = prompt("Enter a column number:") - 1;
-
-            if (gameBoard[row][col] === ".") {
-                break;
-            }
-            console.log("Position already taken. Try again.");
-        }
-        gameBoard[row][col] = playerState;
-        let gameState = checkWinner(row, col);
-        displayBoard();
-
-        if (gameState === "WINNER") {
-            console.log(`${playerState} wins.`);
-            return;
-        }
-        else if (gameState === "DRAW") {
-            console.log("It's a draw.");
-            return;
-        }
-        else if (gameState === "ONGOING") {
-            if (playerState === "x") {
-                playerState = "o";
-            }
-            else {
-                playerState = "x";
-            }
-            playerTurn();
-        }
-    };
-
     const checkWinner = (row, col) => {
         for (let i = 0; i < 3; i++) {
             if (gameBoard[row][i] !== playerState) {
