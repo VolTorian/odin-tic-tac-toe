@@ -13,6 +13,7 @@ const ticTacToeGame = (function () {
         let col = cellClasses[2].charAt(cellClasses[2].length - 1);
 
         if (gameBoard[row][col] === ".") {
+            drawShape(event);
             turns++;
             gameBoard[row][col] = playerState;
             let gameState = checkWinner(row, col);
@@ -151,6 +152,15 @@ const ticTacToeGame = (function () {
 
         return "ONGOING";
     };
+
+    const drawShape = (event) => {
+        if (playerState === "x") {
+            event.target.querySelector("img").src = "./images/close.svg";
+        }
+        else {
+            event.target.querySelector("img").src = "./images/circle-outline.svg";
+        }
+    }
 
     newGameButton.addEventListener("click", newGame);
     gridSquares.forEach((square) => square.addEventListener("click", handlePlayerChoice));
