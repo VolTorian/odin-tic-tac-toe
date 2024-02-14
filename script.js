@@ -52,6 +52,7 @@ const ticTacToeGame = (function () {
             }
         }
         playerState = "x";
+        turnIndicator.src = "./images/close.svg";
         turns = 0;
         gridSquares.forEach((square) => square.querySelector("img").src = "");
         gridSquares.forEach((square) => square.addEventListener("click", handlePlayerChoice));
