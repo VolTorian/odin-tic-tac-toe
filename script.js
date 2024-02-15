@@ -7,6 +7,19 @@ const ticTacToeGame = (function () {
     let playerState = "x";
     let turns = 0;
 
+    const handleCellClick = (event) => {
+        if (event.target.tagName.toUpperCase() === "DIV") {
+            handlePlayerChoice(event);
+        }
+        else if (event.target.tagName.toUpperCase() === "IMG") {
+            console.log("Position already taken. Try again.");
+            // 
+        }
+        else {
+            console.log(`O.o wat this should not have happened ${event.target}`);
+        }
+    }
+
     const handlePlayerChoice = (event) => {
         const cellClasses = event.target.className.split(" ");
         let row = cellClasses[1].charAt(cellClasses[1].length - 1);
@@ -21,12 +34,12 @@ const ticTacToeGame = (function () {
 
             if (gameState === "WINNER") {
                 console.log(`${playerState} wins.`);
-                gridSquares.forEach((square) => square.removeEventListener("click", handlePlayerChoice));
+                gridSquares.forEach((square) => square.removeEventListener("click", handleCellClick));
                 return;
             }
             else if (gameState === "DRAW") {
                 console.log("It's a draw.");
-                gridSquares.forEach((square) => square.removeEventListener("click", handlePlayerChoice));
+                gridSquares.forEach((square) => square.removeEventListener("click", handleCellClick));
                 return;
             }
             else if (gameState === "ONGOING") {
@@ -55,7 +68,7 @@ const ticTacToeGame = (function () {
         turnIndicator.src = "./images/close.svg";
         turns = 0;
         gridSquares.forEach((square) => square.querySelector("img").src = "");
-        gridSquares.forEach((square) => square.addEventListener("click", handlePlayerChoice));
+        gridSquares.forEach((square) => square.addEventListener("click", handleCellClick));
         displayBoard();
     };
 
@@ -128,7 +141,7 @@ const ticTacToeGame = (function () {
     }
 
     newGameButton.addEventListener("click", newGame);
-    gridSquares.forEach((square) => square.addEventListener("click", handlePlayerChoice));
+    gridSquares.forEach((square) => square.addEventListener("click", handleCellClick));
 
     return {newGame, displayBoard};
 })();
