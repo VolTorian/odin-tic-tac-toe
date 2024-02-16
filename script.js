@@ -7,6 +7,19 @@ const ticTacToeGame = (function () {
     let playerState = "x";
     let turns = 0;
 
+    const newGame = () => {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                gameBoard[i][j] = ".";
+            }
+        }
+        playerState = "x";
+        turnIndicator.src = "./images/close.svg";
+        turns = 0;
+        gridSquares.forEach((square) => square.querySelector("img").src = "");
+        gridSquares.forEach((square) => square.addEventListener("click", handleCellClick));
+    };
+
     const handleCellClick = (event) => {
         if (event.target.tagName.toUpperCase() === "DIV") {
             handlePlayerChoice(event);
@@ -30,7 +43,6 @@ const ticTacToeGame = (function () {
             turns++;
             gameBoard[row][col] = playerState;
             let gameState = checkWinner(row, col);
-            displayBoard();
 
             if (gameState === "WINNER") {
                 console.log(`${playerState} wins.`);
@@ -56,20 +68,6 @@ const ticTacToeGame = (function () {
         else {
             console.log("Position already taken. Try again.");
         }
-    };
-
-    const newGame = () => {
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                gameBoard[i][j] = ".";
-            }
-        }
-        playerState = "x";
-        turnIndicator.src = "./images/close.svg";
-        turns = 0;
-        gridSquares.forEach((square) => square.querySelector("img").src = "");
-        gridSquares.forEach((square) => square.addEventListener("click", handleCellClick));
-        displayBoard();
     };
 
     const displayBoard = () => {
@@ -141,7 +139,7 @@ const ticTacToeGame = (function () {
     }
 
     newGameButton.addEventListener("click", newGame);
-    gridSquares.forEach((square) => square.addEventListener("click", handleCellClick));
+    newGame();
 
     return {newGame, displayBoard};
 })();
