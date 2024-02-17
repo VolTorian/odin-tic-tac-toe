@@ -26,7 +26,6 @@ const ticTacToeGame = (function () {
         }
         else if (event.target.tagName.toUpperCase() === "IMG") {
             console.log("Position already taken. Try again.");
-            // 
         }
         else {
             console.log(`O.o wat this should not have happened ${event.target}`);
@@ -83,7 +82,6 @@ const ticTacToeGame = (function () {
                 break;
             }
             if (i == 2) {
-                console.log(`${playerState} wins`);
                 return "WINNER";
             }
         }
@@ -93,7 +91,6 @@ const ticTacToeGame = (function () {
                 break;
             }
             if (i == 2) {
-                console.log(`${playerState} wins`);
                 return "WINNER";
             }
         }
@@ -104,7 +101,6 @@ const ticTacToeGame = (function () {
                     break;
                 }
                 if (i == 2) {
-                    console.log(`${playerState} wins`);
                     return "WINNER";
                 }
             }
@@ -116,7 +112,6 @@ const ticTacToeGame = (function () {
                     break;
                 }
                 if (i == 2) {
-                    console.log(`${playerState} wins`);
                     return "WINNER";
                 }
             }
