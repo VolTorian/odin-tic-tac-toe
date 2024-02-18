@@ -43,17 +43,17 @@ const ticTacToeGame = (function () {
             gameBoard[row][col] = playerState;
             let gameState = checkWinner(row, col);
 
-            if (gameState === "WINNER") {
+            if (gameState[0] === "WINNER") {
                 console.log(`${playerState} wins.`);
                 gridSquares.forEach((square) => square.removeEventListener("click", handleCellClick));
                 return;
             }
-            else if (gameState === "DRAW") {
+            else if (gameState[0] === "DRAW") {
                 console.log("It's a draw.");
                 gridSquares.forEach((square) => square.removeEventListener("click", handleCellClick));
                 return;
             }
-            else if (gameState === "ONGOING") {
+            else if (gameState[0] === "ONGOING") {
                 if (playerState === "x") {
                     playerState = "o";
                     turnIndicator.src = "./images/circle-outline.svg";
@@ -82,7 +82,7 @@ const ticTacToeGame = (function () {
                 break;
             }
             if (i == 2) {
-                return "WINNER";
+                return ["WINNER", "ROW"];
             }
         }
 
@@ -91,7 +91,7 @@ const ticTacToeGame = (function () {
                 break;
             }
             if (i == 2) {
-                return "WINNER";
+                return ["WINNER", "COLUMN"];
             }
         }
 
@@ -101,7 +101,7 @@ const ticTacToeGame = (function () {
                     break;
                 }
                 if (i == 2) {
-                    return "WINNER";
+                    return ["WINNER", "DIAGONAL"];
                 }
             }
         }
@@ -112,16 +112,20 @@ const ticTacToeGame = (function () {
                     break;
                 }
                 if (i == 2) {
-                    return "WINNER";
+                    return ["WINNER", "ANTIDIAGONAL"];
                 }
             }
         }
 
         if (turns >= 9) {
-            return "DRAW";
+            return ["DRAW"];
         }
 
-        return "ONGOING";
+        return ["ONGOING"];
+    };
+
+    const highlightWinner = (type, position) => {
+
     };
 
     const drawShape = (event) => {
