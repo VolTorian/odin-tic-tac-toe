@@ -18,6 +18,7 @@ const ticTacToeGame = (function () {
         turns = 0;
         gridSquares.forEach((square) => square.querySelector("img").src = "");
         gridSquares.forEach((square) => square.addEventListener("click", handleCellClick));
+        gridSquares.forEach((square) => square.classList.remove("win"));
     };
 
     const handleCellClick = (event) => {
@@ -46,6 +47,7 @@ const ticTacToeGame = (function () {
             if (gameState[0] === "WINNER") {
                 console.log(`${playerState} wins.`);
                 gridSquares.forEach((square) => square.removeEventListener("click", handleCellClick));
+                highlightWinner(gameState[1], row, col);
                 return;
             }
             else if (gameState[0] === "DRAW") {
@@ -124,8 +126,26 @@ const ticTacToeGame = (function () {
         return ["ONGOING"];
     };
 
-    const highlightWinner = (type, position) => {
+    const highlightWinner = (type, row, col) => {
+        let winningLine;
 
+        switch (type) {
+            case "ROW":
+                winningLine = document.querySelectorAll(`.row-${row}`);
+                break;
+            case "COLUMN":
+                winningLine = document.querySelectorAll(`.col-${col}`);
+                break;
+            case "DIAGONAL":
+                winningLine = document.querySelectorAll(".row-0.col-0, .row-1.col-1, .row-2.col-2");
+                break;
+            case "ANTIDIAGONAL":
+                winningLine = document.querySelectorAll(".row-0.col-2, .row-1.col-1, .row-2.col-0");
+                break;
+            default:
+                console.log("O.o what issue in highlighting winning line");
+        }
+        winningLine.forEach((square) => square.classList.add("win"));
     };
 
     const drawShape = (event) => {
