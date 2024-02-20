@@ -27,6 +27,8 @@ const ticTacToeGame = (function () {
         }
         else if (event.target.tagName.toUpperCase() === "IMG") {
             console.log("Position already taken. Try again.");
+            event.target.style.backgroundColor = "red";
+            setTimeout(function () {event.target.style.backgroundColor = "transparent"}, 500);
         }
         else {
             console.log(`O.o wat this should not have happened ${event.target}`);
