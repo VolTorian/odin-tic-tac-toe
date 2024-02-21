@@ -27,8 +27,8 @@ const ticTacToeGame = (function () {
         }
         else if (event.target.tagName.toUpperCase() === "IMG") {
             console.log("Position already taken. Try again.");
-            event.target.style.backgroundColor = "red";
-            setTimeout(function () {event.target.style.backgroundColor = "transparent"}, 500);
+            event.target.parentNode.style.backgroundColor = "red";
+            setTimeout(function () {event.target.parentNode.style.backgroundColor = ""}, 500);
         }
         else {
             console.log(`O.o wat this should not have happened ${event.target}`);
@@ -147,6 +147,8 @@ const ticTacToeGame = (function () {
             default:
                 console.log("O.o what issue in highlighting winning line");
         }
+        winningLine.forEach((square) => square.style.backgroundColor = "white");
+        winningLine.forEach((square) => square.style.backgroundColor = "");
         winningLine.forEach((square) => square.classList.add("win"));
     };
 
