@@ -26,9 +26,9 @@ const ticTacToeGame = (function () {
             handlePlayerChoice(event);
         }
         else if (event.target.tagName.toUpperCase() === "IMG") {
-            console.log("Position already taken. Try again.");
-            event.target.parentNode.style.backgroundColor = "red";
-            setTimeout(function () {event.target.parentNode.style.backgroundColor = ""}, 500);
+
+            event.target.parentNode.classList.add("invalid-flash");
+            setTimeout(function() {event.target.parentNode.classList.remove("invalid-flash")}, 1);
         }
         else {
             console.log(`O.o wat this should not have happened ${event.target}`);

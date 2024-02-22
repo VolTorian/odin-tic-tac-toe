@@ -14,6 +14,12 @@ h1 {
 
 .cell {
     border: solid 1px;
+    transition: 1s;
+}
+
+.invalid-flash {
+    background-color: red;
+    transition: 0s;
 }
 
 #turn-box {
