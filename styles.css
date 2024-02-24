@@ -38,3 +38,14 @@ body > * {
 .win {
     background-color: lightgreen;
 }
+
+#names {
+    display: flex;
+    gap: 10px;
+}
+
+#names > div {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}

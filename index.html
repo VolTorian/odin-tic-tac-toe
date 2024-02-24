@@ -12,6 +12,17 @@
         <h1>Tic Tac Toe</h1>
         <button id="new-game">New Game</button>
 
+        <div id="names">
+            <div>
+                <label for="player-x-name">Player x</label>
+                <input id="player-x-name" type="text">
+            </div>
+            <div>
+                <label for="player-o-name">Player o</label>
+                <input id="player-o-name" type="text">
+            </div>
+        </div>
+
         <div id="game-grid">
             <div class="cell row-0 col-0">
                 <img src="">
@@ -43,7 +54,11 @@
         </div>
 
         <div id="turn-box">
-            <img src="./images/close.svg" alt="x's turn" id="current-turn">
+            <img src="./images/close.svg" id="current-turn">
+        </div>
+
+        <div id="status">
+            
         </div>
     </body>
 </html>

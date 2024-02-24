@@ -2,6 +2,7 @@ const ticTacToeGame = (function () {
     const newGameButton = document.getElementById("new-game");
     const gridSquares = document.querySelectorAll(".cell");
     const turnIndicator = document.getElementById("current-turn");
+    const winStatus = document.getElementById("status");
 
     const gameBoard = [[".", ".", "."], [".", ".", "."], [".", ".", "."]];
     let playerState = "x";
@@ -19,6 +20,7 @@ const ticTacToeGame = (function () {
         gridSquares.forEach((square) => square.querySelector("img").src = "");
         gridSquares.forEach((square) => square.addEventListener("click", handleCellClick));
         gridSquares.forEach((square) => square.classList.remove("win"));
+        winStatus.style.display = "none";
     };
 
     const handleCellClick = (event) => {
@@ -50,6 +52,7 @@ const ticTacToeGame = (function () {
                 console.log(`${playerState} wins.`);
                 gridSquares.forEach((square) => square.removeEventListener("click", handleCellClick));
                 highlightWinner(gameState[1], row, col);
+                showWinStatus();
                 return;
             }
             else if (gameState[0] === "DRAW") {
@@ -159,6 +162,18 @@ const ticTacToeGame = (function () {
         else {
             event.target.querySelector("img").src = "./images/circle-outline.svg";
         }
+    }
+
+    const showWinStatus = () => {
+        let winningPlayer;
+        if (playerState === "x") {
+            winningPlayer = document.getElementById("player-x-name").value;
+        }
+        else {
+            winningPlayer = document.getElementById("player-o-name").value;
+        }
+        winStatus.textContent =  `Player ${winningPlayer} wins as ${playerState}`;
+        winStatus.style.display = "block";
     }
 
     newGameButton.addEventListener("click", newGame);
