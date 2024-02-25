@@ -58,6 +58,8 @@ const ticTacToeGame = (function () {
             else if (gameState[0] === "DRAW") {
                 console.log("It's a draw.");
                 gridSquares.forEach((square) => square.removeEventListener("click", handleCellClick));
+                winStatus.textContent = "It's a draw";
+                winStatus.style.display = "block";
                 return;
             }
             else if (gameState[0] === "ONGOING") {
@@ -166,13 +168,18 @@ const ticTacToeGame = (function () {
 
     const showWinStatus = () => {
         let winningPlayer;
+
         if (playerState === "x") {
             winningPlayer = document.getElementById("player-x-name").value;
         }
         else {
             winningPlayer = document.getElementById("player-o-name").value;
         }
-        winStatus.textContent =  `Player ${winningPlayer} wins as ${playerState}`;
+        winStatus.textContent = `Player ${winningPlayer} wins as ${playerState}`;
+        
+        if (winningPlayer === "") {
+            winStatus.textContent = `${playerState} wins`;
+        }
         winStatus.style.display = "block";
     }
 
