@@ -33,6 +33,7 @@ body > * {
     box-sizing: border-box;
     width: 100px;
     height: 100px;
+    transition: background-color 1s;
 }
 
 .win {

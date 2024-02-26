@@ -20,6 +20,7 @@ const ticTacToeGame = (function () {
         gridSquares.forEach((square) => square.querySelector("img").src = "");
         gridSquares.forEach((square) => square.addEventListener("click", handleCellClick));
         gridSquares.forEach((square) => square.classList.remove("win"));
+        document.getElementById("turn-box").classList.remove("win");
         winStatus.style.display = "none";
     };
 
@@ -152,9 +153,8 @@ const ticTacToeGame = (function () {
             default:
                 console.log("O.o what issue in highlighting winning line");
         }
-        winningLine.forEach((square) => square.style.backgroundColor = "white");
-        winningLine.forEach((square) => square.style.backgroundColor = "");
         winningLine.forEach((square) => square.classList.add("win"));
+        document.getElementById("turn-box").classList.add("win");
     };
 
     const drawShape = (event) => {
